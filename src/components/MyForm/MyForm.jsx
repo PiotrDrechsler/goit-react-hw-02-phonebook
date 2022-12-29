@@ -5,6 +5,8 @@ const INITIAL_STATE = {
   lastName: '',
   email: '',
   acceptTC: false,
+  gender: '',
+  favoriteAnimal: '',
 };
 
 export class MyForm extends Component {
@@ -61,9 +63,57 @@ export class MyForm extends Component {
               checked={this.state.acceptTC}
               onChange={this.handleInputChange}
             />
-            <span> Active</span>
+            <span> Accept T & C </span>
           </label>
+          <section>
+            <label>
+              <input
+                name="gender"
+                type="radio"
+                checked={this.state.gender === 'Male'}
+                value="Male"
+                onChange={this.handleInputChange}
+              />
+              <span>Male</span>
+            </label>
+            <label>
+              <input
+                name="gender"
+                type="radio"
+                checked={this.state.gender === 'Feamle'}
+                value="Feamle"
+                onChange={this.handleInputChange}
+              />
+              <span>Feamle</span>
+            </label>
+            <label>
+              <input
+                name="gender"
+                type="radio"
+                checked={this.state.gender === 'Non-binary'}
+                value="Non-binary"
+                onChange={this.handleInputChange}
+              />
+              <span>Non-binary</span>
+            </label>
+          </section>
+
+          <h3>Your favorite animal</h3>
+          <select
+            name="favoriteAnimal"
+            value={this.state.favoriteAnimal}
+            onChange={this.handleInputChange}
+          >
+            <option value="">Choose...</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="snake">Snake</option>
+            <option value="bee">Bee</option>
+          </select>
           <button type="submit">SUBMIT</button>
+          <button type="button" onClick={this.resetForm}>
+            RESET
+          </button>
         </form>
       </>
     );
