@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 export const ContactList = ({ contacts, children }) => {
   return (
     <>
-      <h2>Contacts</h2>
       {children}
       <ul>
         {contacts.map(({ id, name, number }) => (

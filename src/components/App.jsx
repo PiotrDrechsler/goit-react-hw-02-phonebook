@@ -1,6 +1,8 @@
 import { Component } from 'react';
+
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
 
 export class App extends Component {
   constructor() {
@@ -16,13 +18,20 @@ export class App extends Component {
     };
   }
 
+  handleAddContact = newContact =>
+    this.setState(({ contacts }) => ({
+      contacts: [...contacts, newContact],
+    }));
+
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
 
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm addContact={this.handleAddContact} />
+        <h2>Contacts</h2>
+        <Filter filter={filter} />
         <ContactList contacts={contacts} />
       </div>
     );
