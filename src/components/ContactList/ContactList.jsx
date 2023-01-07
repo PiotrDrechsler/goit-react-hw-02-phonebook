@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const ContactList = ({ contacts, children }) => {
+export const ContactList = ({ contacts, children, deleteContact }) => {
   return (
     <>
       {children}
@@ -11,6 +11,13 @@ export const ContactList = ({ contacts, children }) => {
               {name} <br />
               {number}
             </p>
+            <button
+              onClick={() => {
+                deleteContact(id);
+              }}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
@@ -26,4 +33,5 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ),
+  deleteContact: PropTypes.func,
 };

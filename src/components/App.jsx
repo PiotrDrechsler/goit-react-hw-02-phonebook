@@ -18,21 +18,45 @@ export class App extends Component {
     };
   }
 
-  handleAddContact = newContact =>
+  //handle add contact from form
+  addContact = newContact =>
     this.setState(({ contacts }) => ({
       contacts: [...contacts, newContact],
     }));
 
+  //handle filter input
+  addFilter = event => {
+    this.setState({ filter: event.currentTarget.value });
+  };
+
+  //filter contacts
+  filteredContacts = () => {
+    const { filter, contacts } = this.state;
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  //delete contact item
+  deleteContact = id =>
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== id),
+    }));
+
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
 
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm addContact={this.handleAddContact} />
+        <ContactForm addContact={this.addContact} />
         <h2>Contacts</h2>
-        <Filter filter={filter} />
-        <ContactList contacts={contacts} />
+        <Filter filter={filter} addFilter={this.addFilter} />
+        <ContactList
+          contacts={this.filteredContacts()}
+          deleteContact={this.deleteContact}
+        />
       </div>
     );
   }
