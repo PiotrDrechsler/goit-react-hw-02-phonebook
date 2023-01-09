@@ -18,11 +18,22 @@ export class App extends Component {
     };
   }
 
-  //handle add contact from form
-  addContact = newContact =>
-    this.setState(({ contacts }) => ({
-      contacts: [...contacts, newContact],
-    }));
+  //handle add contact from
+  addContact = newContact => {
+    const loweredCase = newContact.name.toLowerCase();
+
+    const exists = this.state.contacts.some(
+      contact => contact.name.toLowerCase() === loweredCase
+    );
+    //check if the name is unique
+    if (exists) {
+      alert(`${newContact.name} is already in contacts!`);
+    } else {
+      this.setState(({ contacts }) => ({
+        contacts: [...contacts, newContact],
+      }));
+    }
+  };
 
   //handle filter input
   addFilter = event => {
