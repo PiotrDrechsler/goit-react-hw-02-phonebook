@@ -4,6 +4,8 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 
+import s from '../App.module.css';
+
 export class App extends Component {
   constructor() {
     super();
@@ -20,10 +22,10 @@ export class App extends Component {
 
   //handle add contact from
   addContact = newContact => {
-    const loweredCase = newContact.name.toLowerCase();
+    const loweredCase = newContact.name.toLowerCase().trim();
 
     const exists = this.state.contacts.some(
-      contact => contact.name.toLowerCase() === loweredCase
+      contact => contact.name.toLowerCase().trim() === loweredCase
     );
     //check if the name is unique
     if (exists) {
@@ -59,16 +61,17 @@ export class App extends Component {
     const { filter } = this.state;
 
     return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm addContact={this.addContact} />
-        <h2>Contacts</h2>
-        <Filter filter={filter} addFilter={this.addFilter} />
-        <ContactList
-          contacts={this.filteredContacts()}
-          deleteContact={this.deleteContact}
-        />
-      </div>
+      <section className={s.content}>
+        <div className={s.content__container}>
+          <ContactForm addContact={this.addContact} />
+          <ContactList
+            contacts={this.filteredContacts()}
+            deleteContact={this.deleteContact}
+          >
+            <Filter filter={filter} addFilter={this.addFilter} />
+          </ContactList>
+        </div>
+      </section>
     );
   }
 }
