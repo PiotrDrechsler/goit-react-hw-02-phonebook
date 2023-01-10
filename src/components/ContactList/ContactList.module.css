@@ -32,6 +32,7 @@
   flex-direction: column;
   align-items: center;
   margin: 20px;
+  flex: calc(25% - 40px);
 }
 .contacts__name {
   margin: 0;
@@ -44,4 +45,5 @@
 .contacts__number {
   font-weight: 600;
   margin: 10px;
-}/*# sourceMappingURL=ContactList.module.css.map */
+  font-size: 15px;
+}

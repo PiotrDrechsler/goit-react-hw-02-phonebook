@@ -20,29 +20,26 @@ export class App extends Component {
     };
   }
 
-  //handle add contact from
-  addContact = newContact => {
-    const loweredCase = newContact.name.toLowerCase().trim();
+  addContact = event => {
+    const loweredCase = event.name.toLowerCase().trim();
 
     const exists = this.state.contacts.some(
       contact => contact.name.toLowerCase().trim() === loweredCase
     );
-    //check if the name is unique
+
     if (exists) {
-      alert(`${newContact.name} is already in contacts!`);
+      alert(`${event.name} is already in contacts!`);
     } else {
       this.setState(({ contacts }) => ({
-        contacts: [...contacts, newContact],
+        contacts: [...contacts, event],
       }));
     }
   };
 
-  //handle filter input
   addFilter = event => {
     this.setState({ filter: event.currentTarget.value });
   };
 
-  //filter contacts
   filteredContacts = () => {
     const { filter, contacts } = this.state;
 
@@ -51,7 +48,6 @@ export class App extends Component {
     );
   };
 
-  //delete contact item
   deleteContact = id =>
     this.setState(({ contacts }) => ({
       contacts: contacts.filter(contact => contact.id !== id),
